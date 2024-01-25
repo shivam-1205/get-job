@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get jobs</title>
+    <script src="https://kit.fontawesome.com/80687ffa6f.js" crossorigin="anonymous"></script>
+    <script src="home.js"></script>
+    <script src="News.js"></script>
+    <script src="about.js"></script>
+    <script src="feedback.js"></script>
+    <script src="Material.js"></script>
+    <script src="script.js"></script>
+    <script src="app.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body onload="onNavigate('/');return false">
+    <div class="logo">Get Job</div>
+
+    <nav>
+        <ul>
+
+            <li><a onclick="onNavigate('/');return false;" class="popof" href="#">Home</a></li>
+            <li><a onclick="onNavigate('/News');return false;" href="#">News</a></li>
+            <li><a onclick="onNavigate('/Material');return false;" href="#">Material</a></li>
+            <li><a onclick="onNavigate('/Feedback');return false;" href="#">Feedback</a></li>
+            <li><a onclick="onNavigate('/about');return false;" href="#">About</a></li>
+            <!-- <li><a href="#">log in</a></li> -->
+            <button onclick="document.getElementById('id01').style.display='block'" class="btnLogin-popup">Log
+                in</button>
+            <div class="social-icons">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-square-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin"></i></a>
+
+            </div>
+
+        </ul>
+    </nav>
+
+
+
+    <!-- Button to open the modal login form -->
+    <!-- The Modal -->
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+
+        <!-- Modal Content -->
+        <form class="modal-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+                <img src="man.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
+    <!-- about us -->
+    <div id='root'></div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
