@@ -1,101 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get job</title>
+    <script
+      src="https://kit.fontawesome.com/80687ffa6f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/home.js"></script>
+    <script src="./js/about.js"></script>
+    <script src="./js/News.js"></script>
+    <script src="./js/Material.js"></script>
+    <script src="./js/script.js"></script>
 
-<head>
+    <link rel="stylesheet" href="style.css" />
 
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css"
+    />
+  </head>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get jobs</title>
-    <script src="https://kit.fontawesome.com/80687ffa6f.js" crossorigin="anonymous"></script>
-    <script src="home.js"></script>
-    <script src="News.js"></script>
-    <script src="about.js"></script>
-    <script src="feedback.js"></script>
-    <script src="Material.js"></script>
-    <script src="script.js"></script>
-    <script src="app.js"></script>
-
-    <link rel="stylesheet" href="style.css">
-
-
-</head>
-
-<body onload="onNavigate('/');return false">
+  <body onload="onNavigate('/');return false">
     <div class="logo">Get Job</div>
-
     <nav>
-        <ul>
+      <ul>
+        <li>
+          <a onclick="onNavigate('/');return false;" class="popof" href="#"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a onclick="onNavigate('/News');return false;" href="#">News</a>
+        </li>
+        <li>
+          <a onclick="onNavigate('/Material');return false;" href="#"
+          >Material</a
+          >
+          
+        </li>
+       
+        <li>
+          <a onclick="onNavigate('/about');return false;" href="#">About</a>
+        </li>
+        <!-- <li><a href="#">log in</a></li> -->
+        <button
+          onclick="document.getElementById('id01').style.display='block'"
+          class="btnLogin-popup"
+          id="login-btn"
+        >
+          Log in
+        </button>
+        <button
+          onclick="document.getElementById('id02').style.display='block'"
+          class="btnLogin-popup"
+          id="signup-btn"
+        >
+          Sign up
+        </button>
+        <button id="logout-btn" style="display: none" class="btnLogin-popup">
+          Log out
+        </button>
 
-            <li><a onclick="onNavigate('/');return false;" class="popof" href="#">Home</a></li>
-            <li><a onclick="onNavigate('/News');return false;" href="#">News</a></li>
-            <li><a onclick="onNavigate('/Material');return false;" href="#">Material</a></li>
-            <li><a onclick="onNavigate('/Feedback');return false;" href="#">Feedback</a></li>
-            <li><a onclick="onNavigate('/about');return false;" href="#">About</a></li>
-            <!-- <li><a href="#">log in</a></li> -->
-            <button onclick="document.getElementById('id01').style.display='block'" class="btnLogin-popup">Log
-                in</button>
-            <div class="social-icons">
-                <a href=""><i class="fa-brands fa-facebook"></i></a>
-                <a href=""><i class="fa-brands fa-square-twitter"></i></a>
-                <a href=""><i class="fa-brands fa-square-instagram"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin"></i></a>
 
-            </div>
-
-        </ul>
+        <!-- -----------------feedback-----------*/ -->
+        <button
+        onclick="document.getElementById('id03').style.display='block'"
+        class="btnLogin-popup"
+        id="login-btn"
+      >
+        feedback
+      </button>
+       
+      
+      <!-- ----------------- social-icons -->
+        <span id="user-name"> </span>
+        <div class="social-icons">
+          <a href=""><i class="fa-brands fa-facebook"></i></a>
+          <a href=""><i class="fa-brands fa-square-twitter"></i></a>
+          <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+          <a href=""><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </ul>
     </nav>
-
-
 
     <!-- Button to open the modal login form -->
     <!-- The Modal -->
     <div id="id01" class="modal">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close"
-            title="Close Modal">&times;</span>
+      <span
+        onclick="document.getElementById('id01').style.display='none'"
+        class="close"
+        title="Close Modal"
+        >&times;</span
+      >
 
-        <!-- Modal Content -->
-        <form class="modal-content animate" action="/action_page.php">
-            <div class="imgcontainer">
-                <img src="man.png" alt="Avatar" class="avatar">
-            </div>
+      <!-- Modal Content -->
 
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+      <form
+        class="modal-content animate"
+        id="login-form"
+        onsubmit="return false;"
+      >
+        <div class="imgcontainer">
+          <img src="man.png" alt="Avatar" class="avatar" />
+        </div>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+        <div class="container">
+          <label for="uname"><b>Email</b></label>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            name="email"
+            required
+            id="uname"
+          />
 
-                <button type="submit">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            required
+            id="psw"
+          />
 
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                    class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
+          <button type="submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember" /> Remember
+            me
+          </label>
+        </div>
+
+
+        <div class="container" style="background-color: #f1f1f1">
+          <button
+            type="button"
+            onclick="document.getElementById('id01').style.display='none'"
+            class="cancelbtn"
+          >
+            Cancel
+          </button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
     </div>
+
+
+    <!-- signup modal -->
+
+    <div id="id02" class="modal">
+      <span
+        onclick="document.getElementById('id01').style.display='none'"
+        class="close"
+        title="Close Modal"
+        >&times;</span
+      >
+
+      <!-- Modal Content -->
+      <form
+        class="modal-content animate"
+        id="signup-form"
+        onsubmit="return false;"
+      >
+        <div class="imgcontainer">
+          <img src="man.png" alt="Avatar" class="avatar" />
+        </div>
+
+        <div class="container">
+          <label for="signup__uname"><b>Email</b></label>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            name="email"
+            required
+            id="signup__uname"
+          />
+
+          <label for="signup__psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            required
+            id="signup__psw"
+          />
+
+          <button type="submit">Sign up</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember" /> Remember
+            me
+          </label>
+        </div>
+
+        <div class="container" style="background-color: #f1f1f1">
+          <button
+            type="button"
+            onclick="document.getElementById('id02').style.display='none'"
+            class="cancelbtn"
+          >
+            Cancel
+          </button>
+          <span class="psw"><a href="#"></a></span>
+        </div>
+      </form>
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div>
+    </div>
+
+    <!-- end signup modal -->
+
+
+
+
+
+
+
+<!-- -----------------feedback----------- -->
+
+<div id="id03" class="modal">
+  <span
+    onclick="document.getElementById('id03').style.display='none'"
+    class="close"
+    title="Close Modal"
+    >&times;</span
+  >
+
+  <!-- Modal Content -->
+  <form
+    class="modal-content animate"
+    id="signup-form"
+    onsubmit="return false;"
+  >
+    <div class="imgcontainer">
+      <img src="man.png" alt="Avatar" class="avatar" />
+    </div>
+
+    <div class="container">
+      <label for="signup__uname"><b>Email</b></label>
+      <input
+        type="email"
+        placeholder="Enter Email"
+        name="email"
+        required
+        id="signup__uname"
+      />
+
+      <label for="signup__psw"><b>Password</b></label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="password"
+        required
+        id="signup__psw"
+      />
+
+      <label for="signup__msg"><b>message </b></label>
+      <input
+        type="message"
+        placeholder="message"
+        name="message"
+        required
+        id="signup__msg"
+        />
+
+
+      <button type="submit">feedback</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember" /> Remember
+        me
+      </label>
+    </div>
+
+    <div class="container" style="background-color: #f1f1f1">
+      <button
+        type="button"
+        onclick="document.getElementById('id03').style.display='none'"
+        class="cancelbtn"
+      >
+        Cancel
+      </button>
+      <span class="psw"><a href="#"></a></span>
+    </div>
+  </form>
+  <div id="firebaseui-auth-container"></div>
+  <div id="loader">Loading...</div>
+</div>
+
+    
+
     <!-- about us -->
-    <div id='root'></div>
+    <div id="root"></div>
 
     <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
+      // Get the modal
+      var modal = document.getElementById("id01");
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
         }
+      };
     </script>
 
-</body>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+      import {
+        getDatabase,
+        set,
+        ref,
+        update,
+      } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
 
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        GoogleAuthProvider,
+        signInWithPopup,
+      } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBS8l8vT-Nko5_Y6zLn1YHKKxddkrFV-MA",
+        authDomain: "get-job-1c565.firebaseapp.com",
+        projectId: "get-job-1c565",
+        storageBucket: "get-job-1c565.appspot.com",
+        messagingSenderId: "953497893879",
+        appId: "1:953497893879:web:9bb6dfa6a376c7d368ccf2",
+        measurementId: "G-X08Q54WDWD",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const analytics = getAnalytics(app);
+
+      // signup
+      const auth = getAuth(app);
+      document.getElementById("signup-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("signup__uname").value;
+        const password = document.getElementById("signup__psw").value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            set(ref(db, "users/" + user.uid), {
+              email: user.email,
+              uid: user.uid,
+              createdOn: Date.now(),
+            });
+
+            set(ref(db, "feedback/" + user.uid), {
+              email: user.email,
+              uid: user.uid,
+              createdOn: Date.now(),
+            });
+
+          })
+         
+
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            alert(errorMessage);
+            // ..
+          });
+      });
+
+      document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("uname").value;
+        const password = document.getElementById("psw").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            update(ref(db, "users/" + user.uid), {
+              email: user.email,
+              uid: user.uid,
+              lastLoginDate: Date.now(),
+            });
+            alert("Logged in successfully!");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(error, errorCode, errorMessage);
+            alert("Invalid username or password!");
+            // ..
+          });
+
+        return false;
+      });
+
+      // auth state change
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          console.log(uid);
+          document.getElementById("logout-btn").style.display = "inline-block";
+          document.getElementById("login-btn").style.display = "none";
+          document.getElementById("signup-btn").style.display = "none";
+          document.getElementById("id01").style.display = "none";
+          document.getElementById("id02").style.display = "none";
+          // ...
+        } else {
+          // User is signed out
+          // ...
+          document.getElementById("logout-btn").style.display = "none";
+          document.getElementById("login-btn").style.display = "inline-block";
+          document.getElementById("signup-btn").style.display = "inline-block";
+        }
+      });
+
+      document.getElementById("logout-btn").addEventListener("click", (e) => {
+        e.preventDefault();
+        signOut(auth)
+          .then(() => {
+            // Sign-out successful.
+            alert("Logged out successfully!");
+          })
+          .catch((error) => {
+            // An error happened.
+            alert(error.message);
+          });
+      });
+
+      //   const firebaseUiAuthConfig = {
+      //     signInFlow: "popup",
+      //     signInOptions: [
+      //       {
+      //         provider: GoogleAuthProvider.PROVIDER_ID,
+      //         requireDisplayName: true,
+      //       },
+      //     ],
+      //     signInSuccessUrl: "/",
+      //     credentialHelper: "none",
+      //     callbacks: {
+      //       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+      //         // User successfully signed in.
+      //         // Return type determines whether we continue the redirect automatically
+      //         // or whether we leave that to developer to handle.
+      //         update(ref(db, "users/" + authResult.uid), {
+      //           email: authResult.email,
+      //           uid: authResult.uid,
+      //           lastLoginDate: Date.now(),
+      //         });
+      //         return true;
+      //       },
+      //     },
+      //   };
+      //   const ui = new firebaseui.auth.AuthUI(auth);
+      //   console.log(ui);
+      //   ui.start("#firebaseui-auth-container", firebaseUiAuthConfig);
+    </script>
+    <script src="./js/app.js"></script>
+  </body>
 </html>
